@@ -1,0 +1,67 @@
+.profile-main-buttons--container {
+    margin: 0 20px 20px 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profile-main-buttons--base {
+    background-image: url("/src/assets/balance-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    text-align: center;
+    padding: 25px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-main-buttons--base:active {
+    transform: scale(0.95);
+}
+
+.profile-main-buttons--base {
+    border-radius: 8px 6px 15px 15px;
+    margin-right: 2.5px;
+}
+
+.profile-main-buttons--right {
+    border-radius: 6px 8px 15px 15px;
+    margin-left: 2.5px;
+}
+
+.profile-balance-block--container {
+    text-align: center;
+    background-image: url("/src/assets/balance-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 20px 20px 5px 20px;
+    padding: 35px 20px;
+    border-radius: 15px 15px 8px 8px;
+    color: #fff;
+}
+
+.profile-balance-block--amount {
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-action-buttons--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 6px 15px;
+}
+
+.profile-action-buttons--button {
+    background: var(--profile-action-button);
+    border-radius: 15px;
+    width: 100%;
+    margin: 0 3px;
+}

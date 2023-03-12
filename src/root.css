@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap");
+
+.vkui--vkCom--light,
+.vkui--vkBase--light,
+.vkui--vkIOS--light,
+:root {
+    --accent: #5d61ec;
+    --profile-action-button: #e6daf1;
+    --back-button-background: #ebeafa;
+    --text-color: black;
+    --text-color-revert: white;
+    --shop-profit-background: #e72e47;
+    --shop-offer-lite: #0095ff;
+    --shop-offer-medium: #ffc400;
+    --shop-offer-middle: #8854e3;
+    --shop-offer-mega: #f13b56;
+    --card-background: #ede9f1;
+    --modal-card-background: #ffffff;
+    --background-content: #ffffff;
+    --tabbar-background: #f1eff5;
+    --input-background: #ede9f1;
+    --tabbar-icon-inactive: #4d4d4d;
+    --red: #b4103a;
+    --green: #28b75a;
+}
+
+.vkui--vkCom--dark,
+.vkui--vkBase--dark,
+.vkui--vkIOS--dark,
+:root {
+    --profile-action-button: #211d2d;
+    --back-button-background: rgba(40, 26, 63, 0.37);
+    --text-color: white;
+    --text-color-revert: black;
+    --card-background: #191525;
+    --modal-card-background: #1e1b2a;
+    --background-content: #100d15;
+    --tabbar-background: rgb(26, 21, 33);
+    --input-background: #191525;
+    --tabbar-icon-inactive: #d7d7d7;
+}
+
+* {
+    user-select: none;
+    font-family: "Rubik", sans-serif;
+}
+
+.vkuiPullToRefresh--ios,
+.vkuiPullToRefresh__spinner {
+    color: var(--accent) !important;
+}
+
+.vkuiInput {
+    border-radius: 12px !important;
+    background: var(--input-background) !important;
+}
+
+.vkuiModalCardBase__container {
+    border-radius: 14px !important;
+    background: var(--modal-card-background) !important;
+}
+
+.vkuiPanel,
+.vkuiPanel__in,
+.vkuiPanel:before
+{
+    background: var(--background-content) !important;
+    min-height: 100vh;
+}
+
+.vkuiTabbar {
+    background: var(--tabbar-background) !important;
+}

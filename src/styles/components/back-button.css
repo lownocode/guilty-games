@@ -1,0 +1,16 @@
+.back-button-container {
+    background: var(--back-button-background);
+    min-width: 35px;
+    min-height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-button-container:active {
+    transform: scale(0.90);
+}
