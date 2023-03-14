@@ -77,7 +77,7 @@ export const ChangeNicknameColorModal = ({ nav }) => {
                             color: nicknameColors[selectedColor]
                         }}
                     >
-                        Пример выбранного цвета
+                        {userData.name}
                     </div>
                 </div>
             </div>

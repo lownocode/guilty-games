@@ -24,6 +24,9 @@
     --tabbar-icon-inactive: #4d4d4d;
     --red: #b4103a;
     --green: #28b75a;
+    --vkui--color_background_content: #ffffff !important;
+    --bonus-card-background: #9191da;
+    --bonus-card-icon-color: rgba(43, 19, 129, 0.52);
 }
 
 .vkui--vkCom--dark,
@@ -40,11 +43,15 @@
     --tabbar-background: rgb(26, 21, 33);
     --input-background: #191525;
     --tabbar-icon-inactive: #d7d7d7;
+    --vkui--color_background_content: #100d15 !important;
+    --bonus-card-background: #33335d;
+    --bonus-card-icon-color: #6c89ee;
 }
 
 * {
     user-select: none;
     font-family: "Rubik", sans-serif;
+    outline: none;
 }
 
 .vkuiPullToRefresh--ios,
@@ -72,4 +79,10 @@
 
 .vkuiTabbar {
     background: var(--tabbar-background) !important;
+}
+
+.defaultFlexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

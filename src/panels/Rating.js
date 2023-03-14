@@ -15,8 +15,9 @@ import {
 } from "@vkontakte/icons"
 
 import ratingBackground from "../assets/rating-background.png"
-import { splitSum } from "../functions"
+import { formatNumToKFormat, splitSum } from "../functions"
 import { getDailyRating } from "../redux/reducers"
+import { nicknameColors } from "../data"
 
 export const Rating = ({ id }) => {
     const dispatch = useDispatch()
@@ -41,7 +42,7 @@ export const Rating = ({ id }) => {
                     borderRadius: 15,
                     maxHeight: 65,
                     paddingLeft: 0,
-                    border: user.vkId === userData.vkId ? "1px solid var(--accent)" : "none"
+                    border: user.vkId === userData.vkId ? "1px solid var(--accent)" : "none",
                 }}
                 href={`https://vk.com/id${user.vkId}`}
                 target="_blank"
@@ -65,13 +66,13 @@ export const Rating = ({ id }) => {
                                 fontWeight: "bold"
                             }}
                         >
-                            {splitSum(user.reward)} {dailyRating.currency}
+                            {formatNumToKFormat(user.reward)} {dailyRating.currency}
                         </div>
                     ) : <Icon28ChevronRightOutline color={"var(--accent)"} />
                 }
             >
                 <SimpleCell
-                    style={{ padding: 0 }}
+                    style={{ padding: 0, color: nicknameColors[user.nameColors[0]] }}
                     disabled
                     before={<Avatar src={user.photo} style={{ marginTop:0, marginBottom: 0 }} />}
                     subtitle={`${splitSum(user.stats.dailyWinCoins)} ${dailyRating.currency}`}
@@ -123,7 +124,59 @@ export const Rating = ({ id }) => {
 
                 <div style={{ marginTop: 15, color: "#fff" }}>
                     Каждый день мы разыгрываем <b>{splitSum(dailyRating.totalReward ?? 0)} {dailyRating.currency}</b> среди
-                    топ-10 лучших игроков. Выдача призов происходит ровно в 0:00 по МСК
+                    10 лучших игроков. Выдача призов происходит ровно в 0:00 по МСК
+                </div>
+
+                <div
+                    style={{
+                        margin: "15px 0"
+                    }}
+                />
+
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        alignItems: "center"
+                    }}
+                >
+                    <div
+                        style={{
+                            textAlign: "center",
+                            color: "#fff",
+                            fontWeight: "100"
+                        }}
+                    >
+                        Ваше место
+                        <div
+                            style={{ fontWeight: "500" }}
+                        >
+                            {dailyRating.currentUserIndex}
+                        </div>
+                    </div>
+
+                    <div
+                        style={{
+                            width: 1,
+                            background: "rgba(255,255,255,0.68)",
+                            height: 20
+                        }}
+                    />
+
+                    <div
+                        style={{
+                            textAlign: "center",
+                            color: "#fff",
+                            fontWeight: "100"
+                        }}
+                    >
+                        Вы наиграли
+                        <div
+                            style={{ fontWeight: "500" }}
+                        >
+                            {splitSum(userData.stats.dailyWinCoins)} GC
+                        </div>
+                    </div>
                 </div>
             </div>
 
