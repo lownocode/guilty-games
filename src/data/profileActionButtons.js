@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React from "react"
 import { push } from "@itznevikat/router"
 
 import {
@@ -38,28 +38,26 @@ const profileActionButtons = [
     ],
 ]
 
-export const ProfileActionButtons = React.memo(() => {
-    return useMemo(() => {
-        return profileActionButtons.map(chunk => {
-            return (
-                <div className="profile-action-buttons--container">
-                    {
-                        useMemo(() => {
-                            return chunk.map(button => (
-                                <SimpleCell
-                                    onClick={button.onClick}
-                                    target={"_blank"}
-                                    href={button.href}
-                                    before={button.icon}
-                                    className="profile-action-buttons--button"
-                                >
-                                    {button.title}
-                                </SimpleCell>
-                            ))
-                        }, [])
-                    }
-                </div>
-            )
-        })
-    }, [])
+export const profileActionButtonsRender =  profileActionButtons.map((chunk, chunkIndex) => {
+    return (
+        <div
+            className="profile-action-buttons--container"
+            key={"chunk-" + chunkIndex}
+        >
+            {
+                chunk.map(button => (
+                    <SimpleCell
+                        key={"button-" + button.title}
+                        onClick={button.onClick}
+                        target={"_blank"}
+                        href={button.href}
+                        before={button.icon}
+                        className="profile-action-buttons--button"
+                    >
+                        {button.title}
+                    </SimpleCell>
+                ))
+            }
+        </div>
+    )
 })

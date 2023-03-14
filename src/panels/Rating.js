@@ -17,7 +17,7 @@ import {
 import ratingBackground from "../assets/rating-background.png"
 import { formatNumToKFormat, splitSum } from "../functions"
 import { getDailyRating } from "../redux/reducers"
-import { nicknameColors } from "../data"
+import { config, nicknameColors } from "../data"
 
 export const Rating = ({ id }) => {
     const dispatch = useDispatch()
@@ -174,7 +174,7 @@ export const Rating = ({ id }) => {
                         <div
                             style={{ fontWeight: "500" }}
                         >
-                            {splitSum(userData.stats.dailyWinCoins)} GC
+                            {splitSum(userData.stats.dailyWinCoins)} {config.currency}
                         </div>
                     </div>
                 </div>

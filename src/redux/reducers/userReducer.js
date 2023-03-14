@@ -16,7 +16,8 @@ const userSlice = createSlice({
     name: "user",
     initialState: {
         userData: {
-            nameColors: [0]
+            nameColors: [0],
+            name: "Пользователь"
         },
         fetchingUserData: false,
     },

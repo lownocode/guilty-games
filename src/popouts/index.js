@@ -1,3 +1,1 @@
-export const popouts = [
-
-]
+export const popouts = []

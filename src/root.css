@@ -27,6 +27,8 @@
     --vkui--color_background_content: #ffffff !important;
     --bonus-card-background: #9191da;
     --bonus-card-icon-color: rgba(43, 19, 129, 0.52);
+    --screen-spinner-background: #d8c9ff;
+    --snackbar-background: #f6f4ff;
 }
 
 .vkui--vkCom--dark,
@@ -40,12 +42,14 @@
     --card-background: #191525;
     --modal-card-background: #1e1b2a;
     --background-content: #100d15;
-    --tabbar-background: rgb(26, 21, 33);
+    --tabbar-background: #1A1521FF;
     --input-background: #191525;
     --tabbar-icon-inactive: #d7d7d7;
     --vkui--color_background_content: #100d15 !important;
     --bonus-card-background: #33335d;
     --bonus-card-icon-color: #6c89ee;
+    --screen-spinner-background: #201934;
+    --snackbar-background: #1f1b2f;
 }
 
 * {
@@ -85,4 +89,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.vkuiScreenSpinner {
+    background: rgba(6, 6, 30, 0.6) !important;
+}
+
+.vkuiScreenSpinner__spinner {
+    color: var(--accent) !important;
+}
+.vkuiScreenSpinner__container {
+    border-radius: 15px !important;
+    background: var(--screen-spinner-background) !important;
+}
+
+.vkuiSnackbar__body {
+    background: var(--snackbar-background) !important;
+    border-radius: 13px !important;
 }

@@ -1,5 +1,4 @@
 import React from "react"
-import { TabbarItem, Tabbar as VKUITabbar } from "@vkontakte/vkui"
 import { replace, useLocation } from "@itznevikat/router"
 import {
     Icon20ShieldLineOutline,
@@ -14,12 +13,12 @@ export const Tabbar = () => {
     const location = useLocation()
 
     const Item = props => {
-        const { icon, onClick } = props
+        const { icon, onClick, path } = props
 
         return (
             <div
                 className={"tabbar-item"}
-                onClick={onClick}
+                onClick={location.pathname !== path ? onClick : null}
             >
                 {icon}
             </div>
@@ -29,6 +28,7 @@ export const Tabbar = () => {
     return (
         <div className={"tabbar-container"}>
             <Item
+                path={"/"}
                 onClick={() => replace("/")}
                 icon={
                     <Icon20UserCircleOutline
@@ -40,6 +40,7 @@ export const Tabbar = () => {
             />
 
             <Item
+                path={"/rating"}
                 onClick={() => replace("/rating")}
                 icon={
                     <Icon32PollOutline
@@ -51,6 +52,7 @@ export const Tabbar = () => {
             />
 
             <Item
+                path={"/games"}
                 onClick={() => replace("/games")}
                 icon={
                     <Icon28GameOutline
@@ -62,6 +64,7 @@ export const Tabbar = () => {
             />
 
             <Item
+                path={"/clan"}
                 onClick={() => replace("/clan")}
                 icon={
                     <Icon20ShieldLineOutline

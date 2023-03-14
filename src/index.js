@@ -12,6 +12,14 @@ axios.defaults.headers["Content-Type"] = "application/json"
 
 bridge.send("VKWebAppInit")
 
+export const setupNavColors = async (appearance, statusBarColor, navbarColor) => {
+    await bridge.send("VKWebAppSetViewSettings", {
+        status_bar_style: appearance,
+        action_bar_color: statusBarColor,
+        navigation_bar_color: navbarColor
+    })
+}
+
 const root = document.getElementById("root")
 const app = (
     <Provider store={store}>

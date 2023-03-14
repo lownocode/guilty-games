@@ -15,7 +15,7 @@ import "../styles/panels/profile.css"
 import { splitSum } from "../functions"
 import { CoinIcon } from "../assets"
 import { getUserData } from "../redux/reducers"
-import { nicknameColors, ProfileActionButtons } from "../data"
+import { nicknameColors, profileActionButtonsRender } from "../data"
 
 export const Profile = ({ id }) => {
 	const dispatch = useDispatch()
@@ -75,7 +75,7 @@ export const Profile = ({ id }) => {
 						</div>
 					</div>
 
-					<ProfileActionButtons />
+					{profileActionButtonsRender}
 				</PullToRefresh>
 			</PlatformProvider>
 		</Panel>

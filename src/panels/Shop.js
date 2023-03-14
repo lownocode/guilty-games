@@ -88,6 +88,7 @@ export const Shop = ({ id }) => {
 
         return (
             <SimpleCell
+                key={"offer-" + offer.cost}
                 before={icon()}
                 after={<Icon16ChevronOutline color={"var(--text-color)"}/>}
                 subtitle={

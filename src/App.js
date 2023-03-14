@@ -1,9 +1,13 @@
 import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import bridge from "@vkontakte/vk-bridge"
 import {
 	AdaptivityProvider,
 	ConfigProvider,
 	AppRoot,
 	SplitLayout,
+	ScreenSpinner,
+	useAppearance
 } from "@vkontakte/vkui"
 import {
 	Match,
@@ -14,12 +18,9 @@ import {
 	useParams,
 	matchPopout
 } from "@itznevikat/router"
-import { useDispatch } from "react-redux"
-import bridge from "@vkontakte/vk-bridge"
 
 import "./root.css"
 import "@vkontakte/vkui/dist/vkui.css"
-
 import { Tabbar } from "./components"
 import {
 	Profile,
@@ -30,9 +31,10 @@ import {
 	Shop,
 	Promocodes,
 } from "./panels"
-import { getUserData, setVkToken } from "./redux/reducers"
+import { getUserData, setLoading, setVkToken } from "./redux/reducers"
 import { modals } from "./modals"
 import { popouts } from "./popouts"
+import { setupNavColors } from "./index"
 
 const TABBAR_HIDE_IN_PANELS = ["/bonuses", "/shop", "/promocodes"]
 
@@ -40,12 +42,21 @@ export const App = () => {
 	const dispatch = useDispatch()
 	const location = useLocation()
 	const { popout = null } = useParams()
+	const { loading, snackbar } = useSelector(state => state.app)
+	const appearance = useAppearance()
+
+	const statusBarColor = getComputedStyle(document.documentElement).getPropertyValue("--background-content")
+	const navbarColor = getComputedStyle(document.documentElement).getPropertyValue("--tabbar-background")
 
 	useEffect(() => {
-		dispatch(getUserData())
-
 		getUserVkToken()
+
+		dispatch(getUserData()).finally(() => dispatch(setLoading(false)))
 	}, [])
+
+	useEffect(() => {
+		setupNavColors(appearance, statusBarColor, navbarColor)
+	}, [statusBarColor, navbarColor])
 
 	const getUserVkToken = async () => {
 		const { access_token } = await bridge.send("VKWebAppGetAuthToken", {
@@ -57,11 +68,13 @@ export const App = () => {
 	}
 
 	return (
-		<ConfigProvider>
+		<ConfigProvider platform={"ios"}>
 			<AdaptivityProvider>
+				{snackbar}
+
 				<SplitLayout
 					modal={modals}
-					popout={matchPopout(popout, popouts)}
+					popout={loading ? <ScreenSpinner /> : matchPopout(popout, popouts)}
 				/>
 
 				<AppRoot>

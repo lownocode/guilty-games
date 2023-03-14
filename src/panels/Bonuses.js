@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
-import { back } from "@itznevikat/router"
+import { back, push } from "@itznevikat/router"
 import { useDispatch, useSelector } from "react-redux"
 import bridge from "@vkontakte/vk-bridge"
 
@@ -17,8 +17,8 @@ import {
 
 import "../styles/panels/bonuses.css"
 import { BackButton } from "../components"
-import { formatNumToKFormat, getRunParams, splitSum } from "../functions"
-import { getUserData } from "../redux/reducers"
+import { formatNumToKFormat, getRunParams } from "../functions"
+import { closeSnackbar, getUserData, openSnackbar } from "../redux/reducers"
 import { CoinIcon } from "../assets"
 
 export const Bonuses = ({ id }) => {
@@ -29,7 +29,7 @@ export const Bonuses = ({ id }) => {
     const [ adBonusStatus, setAdBonusStatus ] = useState({ status: "default" })
     const [ loadingBtn, setLoadingBtn ] = useState(null)
     const [ loadingCard, setLoadingCard ] = useState(null)
-    const [ bonusCards, setBonusCards ] = useState(userData.cardsData || [1,2,3,4,5,6,7,8,9])
+    const [ bonusCards, setBonusCards ] = useState(userData.cardsData || [0, 1, 2, 3, 4, 5, 6, 7, 8])
 
     const getSupportBonus = async () => {
         setLoadingBtn("supportBonus")
@@ -39,7 +39,7 @@ export const Bonuses = ({ id }) => {
                 "vk-params": await getRunParams()
             }
         })
-            .catch(({ response: { data } }) => {
+            .then(({ response: { data } }) => {
                 dispatch(getUserData())
                 setSupportBonusStatus({ ...data, status: "error" })
             })
@@ -61,6 +61,11 @@ export const Bonuses = ({ id }) => {
                 dispatch(getUserData())
 
                 if (data.fields) {
+                    push("?modal=cardBonus", {
+                        win: Boolean(data.reward),
+                        bonus: data.reward
+                    })
+
                     return setBonusCards(data.fields)
                 }
 
@@ -72,7 +77,11 @@ export const Bonuses = ({ id }) => {
 
                 setBonusCards(newCards)
             })
-            .catch(({ response: { data } }) => console.log(data))
+            .catch(({ response: { data } }) => dispatch(openSnackbar({
+                text: data.message,
+                type: "failure",
+                onClose: () => dispatch(closeSnackbar())
+            })))
             .finally(() => setLoadingCard(null))
     }
 

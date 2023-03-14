@@ -12,6 +12,14 @@
     transition: 0.3s all ease;
 }
 
+.games-game-card--container:hover {
+    transform: scale(1.03);
+}
+
+.games-game-card--container:active {
+    transform: scale(0.95);
+}
+
 .games-game-card--title {
     background: rgba(0, 0, 0, 0.55);
     border-radius: 10px;

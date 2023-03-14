@@ -27,6 +27,7 @@ export const ChangeNicknameColorModal = ({ nav }) => {
     const colorsRender = nicknameColors.map((color, index) => {
         return (
             <div
+                key={"color-" + color}
                 className={"change-nickname-color-modal--color"}
                 onClick={() => setSelectedColor(index)}
                 style={{
