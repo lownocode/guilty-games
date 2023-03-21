@@ -1,8 +1,7 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { back, push } from "@itznevikat/router"
 import { useDispatch, useSelector } from "react-redux"
-import bridge from "@vkontakte/vk-bridge"
 
 import {
     Panel,
@@ -18,8 +17,25 @@ import {
 import "../styles/panels/bonuses.css"
 import { BackButton } from "../components"
 import { formatNumToKFormat, getRunParams } from "../functions"
-import { closeSnackbar, getUserData, openSnackbar } from "../redux/reducers"
+import {
+    getUserData,
+    openSnackbar,
+    startCardsBonusTimer,
+} from "../redux/reducers"
 import { CoinIcon } from "../assets"
+import bridge from "@vkontakte/vk-bridge"
+
+const defaultCardsData = [
+    { id: 0, isOpen: false },
+    { id: 1, isOpen: false },
+    { id: 2, isOpen: false },
+    { id: 3, isOpen: false },
+    { id: 4, isOpen: false },
+    { id: 5, isOpen: false },
+    { id: 6, isOpen: false },
+    { id: 7, isOpen: false },
+    { id: 8, isOpen: false },
+]
 
 export const Bonuses = ({ id }) => {
     const dispatch = useDispatch()
@@ -29,7 +45,19 @@ export const Bonuses = ({ id }) => {
     const [ adBonusStatus, setAdBonusStatus ] = useState({ status: "default" })
     const [ loadingBtn, setLoadingBtn ] = useState(null)
     const [ loadingCard, setLoadingCard ] = useState(null)
-    const [ bonusCards, setBonusCards ] = useState(userData.cardsData || [0, 1, 2, 3, 4, 5, 6, 7, 8])
+    const [ bonusCards, setBonusCards ] = useState([])
+
+    useEffect(() => {
+        const defaultCards = defaultCardsData.map((card, index) => {
+            const userCard = userData?.cardsData?.find(c => c.id === index && c.isOpen)
+
+            if (userCard) return userCard
+
+            return card
+        })
+
+        setBonusCards(defaultCards)
+    }, [])
 
     const getSupportBonus = async () => {
         setLoadingBtn("supportBonus")
@@ -47,6 +75,7 @@ export const Bonuses = ({ id }) => {
             .finally(() => setLoadingBtn(null))
     }
 
+
     const openCard = async cardIndex => {
         setLoadingCard(cardIndex)
 
@@ -58,9 +87,11 @@ export const Bonuses = ({ id }) => {
             }
         })
             .then(({ data }) => {
-                dispatch(getUserData())
-
                 if (data.fields) {
+                    setTimeout(() => {
+                        dispatch(getUserData())
+                    }, 30_000)
+
                     push("?modal=cardBonus", {
                         win: Boolean(data.reward),
                         bonus: data.reward
@@ -80,7 +111,6 @@ export const Bonuses = ({ id }) => {
             .catch(({ response: { data } }) => dispatch(openSnackbar({
                 text: data.message,
                 type: "failure",
-                onClose: () => dispatch(closeSnackbar())
             })))
             .finally(() => setLoadingCard(null))
     }
@@ -114,7 +144,7 @@ export const Bonuses = ({ id }) => {
                 onClick={() => !disabled && openCard(index)}
                 className={
                     isOpen ? "bonuses-card-item--opened" :
-                    value && !isOpen ? "bonuses-card-item--revealed" : "bonuses-card-item"
+                        value && !isOpen ? "bonuses-card-item--revealed" : "bonuses-card-item"
                 }
                 style={{
                     background: backgroundColor
@@ -147,28 +177,44 @@ export const Bonuses = ({ id }) => {
     })
 
     const adBonus = async () => {
+        setLoadingBtn("adBonus")
+
         const { result } = await bridge.send("VKWebAppCheckNativeAds", {
             ad_format: "reward"
         })
 
         if (!result) {
-            console.log("no ads")
+            setLoadingBtn(null)
+
+            return dispatch(openSnackbar({
+                type: "failure",
+                text: "На данный момент для вас нет рекламы"
+            }))
         }
 
         bridge.send("VKWebAppShowNativeAds", { ad_format: "reward" })
             .then(({ result }) => {
                 if (result) {
-                    console.log('Реклама показана')
-
-                    return
+                    return push("?popout=verifyAdBonus")
                 }
 
-                console.log('Ошибка при показе')
+                dispatch(openSnackbar({
+                    type: "failure",
+                    text: "По какой-то причине произошла ошибка при показе рекламы, попробуйте позже"
+                }))
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(() => {
+                dispatch(openSnackbar({
+                    type: "failure",
+                    text: "По какой-то причине произошла ошибка при показе рекламы, попробуйте позже"
+                }))
             })
+            .finally(() => setLoadingBtn(null))
     }
+
+    useEffect(() => {
+        dispatch(startCardsBonusTimer())
+    }, [])
 
     return (
         <Panel id={id}>
@@ -189,9 +235,22 @@ export const Bonuses = ({ id }) => {
                             то вы получите указанный на них бонус от 500 до 25 000 монет
                         </div>
 
-                        <div className={"bonuses-card-container"}>
-                            {bonusCardsRender}
-                        </div>
+                        {
+                            userData.bonusesAvailableAt.cards > 0 ? (
+                                <div>
+                                    До нового бонуса осталось:
+                                    <div className={"bonuses-card--timer"}>
+                                        {
+                                            new Date(userData.bonusesAvailableAt.cards * 1000).toISOString().slice(11, 19)
+                                        }
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className={"bonuses-card-container"}>
+                                    {bonusCardsRender}
+                                </div>
+                            )
+                        }
                     </div>
                 }
                 disabled
@@ -258,27 +317,21 @@ export const Bonuses = ({ id }) => {
                             Смотрите рекламу и получайте бонус от 100 до 300 монет за один просмотр
                         </div>
 
-                        <FormItem
-                            style={{ padding: 0 }}
-                            bottom={adBonusStatus.message}
-                            status={adBonusStatus.status}
+                        <Button
+                            size="m"
+                            onClick={() => adBonus()}
+                            disabled={loadingBtn !== null}
+                            loading={loadingBtn === "adBonus"}
+                            before={<Icon28PlayCards2Outline width={20} height={20} />}
+                            stretched
+                            style={{
+                                color: "#fff",
+                                background: "var(--accent)",
+                                marginTop: 15
+                            }}
                         >
-                            <Button
-                                size="m"
-                                onClick={() => adBonus()}
-                                disabled={loadingBtn !== null}
-                                loading={loadingBtn === "adBonus"}
-                                before={<Icon28PlayCards2Outline width={20} height={20} />}
-                                stretched
-                                style={{
-                                    color: "#fff",
-                                    background: "var(--accent)",
-                                    marginTop: 15
-                                }}
-                            >
-                                Смотреть рекламу
-                            </Button>
-                        </FormItem>
+                            Смотреть рекламу
+                        </Button>
                     </div>
                 }
                 disabled

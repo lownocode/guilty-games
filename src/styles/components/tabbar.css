@@ -2,28 +2,24 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 56px;
+    height: var(--tabbar-height);
     background: var(--tabbar-background);
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    transition: all 0.3s ease;
 }
 
-.inactive-icon {
+.tabbar-icon {
     padding: 10px;
     border-radius: 17px;
     color: var(--tabbar-icon-inactive);
 }
 
-.active-icon {
+.tabbar-icon-active {
     background: var(--accent);
-    padding: 10px;
-    border-radius: 17px;
-    transform: translateY(-10px);
     color: #fff;
-    animation: upIcon 300ms;
+    cursor: default;
 }
 
 .tabbar-item {
@@ -33,17 +29,15 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: 0.3s all ease;
+}
+
+.tabbar-item-active {
+    cursor: default;
+    animation: upIcon ease;
+    transform: translateY(-10px);
 }
 
 .tabbar-item:active {
     transform: scale(0.95);
-}
-
-@keyframes upIcon {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(-10px);
-    }
 }

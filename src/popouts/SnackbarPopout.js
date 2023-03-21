@@ -1,4 +1,6 @@
 import React from "react"
+import { useDispatch } from "react-redux"
+
 import {
     Snackbar
 } from "@vkontakte/vkui"
@@ -7,12 +9,15 @@ import {
     Icon28CancelCircleOutline
 } from "@vkontakte/icons"
 
+import { closeSnackbar } from "../redux/reducers"
+
 export const SnackbarPopout = (props) => {
     const {
         type = "success",
         text = "Example of the text",
-        onClose
     } = props
+
+    const dispatch = useDispatch()
 
     const icon = {
         success: <Icon28CheckCircleOutline style={{ color: "var(--green)" }} />,
@@ -21,7 +26,7 @@ export const SnackbarPopout = (props) => {
 
     return (
         <Snackbar
-            onClose={onClose}
+            onClose={() => dispatch(closeSnackbar())}
             before={icon}
         >
             {text}

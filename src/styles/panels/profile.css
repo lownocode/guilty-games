@@ -6,7 +6,6 @@
 }
 
 .profile-main-buttons--base {
-    background-image: url("/src/assets/balance-background.png");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -22,19 +21,21 @@
     transform: scale(0.95);
 }
 
-.profile-main-buttons--base {
+.profile-main-buttons--left {
     border-radius: 8px 6px 15px 15px;
     margin-right: 2.5px;
+    background-image: url("/src/assets/bonus-background.jpg");
 }
 
 .profile-main-buttons--right {
     border-radius: 6px 8px 15px 15px;
     margin-left: 2.5px;
+    background-image: url("/src/assets/shop-background.jpg");
 }
 
 .profile-balance-block--container {
     text-align: center;
-    background-image: url("/src/assets/balance-background.png");
+    background-image: url("/src/assets/balance-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     margin: 20px 20px 5px 20px;
@@ -60,8 +61,17 @@
 }
 
 .profile-action-buttons--button {
-    background: var(--profile-action-button);
+    background: var(--card-background);
     border-radius: 15px;
     width: 100%;
     margin: 0 3px;
+}
+
+.profile-actions-header {
+    margin-left: 20px;
+    color: var(--text-color);
+    font-size: 12px;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 5px;
 }

@@ -37,7 +37,7 @@ export const Games = ({ id }) => {
                 key={game.title}
                 className={"games-game-card--container"}
                 style={{
-                    backgroundImage: `url(${game.image})`
+                    backgroundImage: `url(${game.image})`,
                 }}
             >
                 <div className={"games-game-card--title"}>

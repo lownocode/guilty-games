@@ -31,7 +31,12 @@ import {
 	Shop,
 	Promocodes,
 } from "./panels"
-import { getUserData, setLoading, setVkToken } from "./redux/reducers"
+import {
+	getUserData,
+	setLoading,
+	setVkToken,
+	startCardsBonusTimer
+} from "./redux/reducers"
 import { modals } from "./modals"
 import { popouts } from "./popouts"
 import { setupNavColors } from "./index"
@@ -50,8 +55,6 @@ export const App = () => {
 
 	useEffect(() => {
 		getUserVkToken()
-
-		dispatch(getUserData()).finally(() => dispatch(setLoading(false)))
 	}, [])
 
 	useEffect(() => {

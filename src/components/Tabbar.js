@@ -17,7 +17,7 @@ export const Tabbar = () => {
 
         return (
             <div
-                className={"tabbar-item"}
+                className={`tabbar-item ${location.pathname === path ? "tabbar-item-active" : ""}`}
                 onClick={location.pathname !== path ? onClick : null}
             >
                 {icon}
@@ -34,7 +34,7 @@ export const Tabbar = () => {
                     <Icon20UserCircleOutline
                         width={28}
                         height={28}
-                        className={location.pathname === "/" ? "active-icon" : "inactive-icon"}
+                        className={`tabbar-icon ${location.pathname === "/" ? "tabbar-icon-active" : ""}`}
                     />
                 }
             />
@@ -46,7 +46,7 @@ export const Tabbar = () => {
                     <Icon32PollOutline
                         width={28}
                         height={28}
-                        className={location.pathname === "/rating" ? "active-icon" : "inactive-icon"}
+                        className={`tabbar-icon ${location.pathname === "/rating" ? "tabbar-icon-active" : ""}`}
                     />
                 }
             />
@@ -58,7 +58,7 @@ export const Tabbar = () => {
                     <Icon28GameOutline
                         width={28}
                         height={28}
-                        className={location.pathname === "/games" ? "active-icon" : "inactive-icon"}
+                        className={`tabbar-icon ${location.pathname === "/games" ? "tabbar-icon-active" : ""}`}
                     />
                 }
             />
@@ -70,7 +70,7 @@ export const Tabbar = () => {
                     <Icon20ShieldLineOutline
                         width={28}
                         height={28}
-                        className={location.pathname === "/clan" ? "active-icon" : "inactive-icon"}
+                        className={`tabbar-icon ${location.pathname === "/clan" ? "tabbar-icon-active" : ""}`}
                     />
                 }
             />

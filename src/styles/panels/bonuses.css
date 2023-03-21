@@ -16,6 +16,12 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    background: repeating-linear-gradient(45deg,
+            rgba(101, 55, 229, 0.4),
+            rgba(101, 55, 229, 0.4) 8px,
+            rgba(125, 55, 231, 0.2) 0,
+            rgba(125, 55, 231, 0.2) 20px
+    );
 }
 
 .bonuses-card-item--opened {
@@ -66,7 +72,7 @@
 }
 
 .bonuses-card-item:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 .bonuses-card-item:active {
@@ -76,6 +82,24 @@
 
 .bonuses-infinity-rotate {
     animation: 1s rotate linear infinite;
+}
+
+.bonuses-card--timer {
+    animation: moveTimerBackground 4s linear infinite;
+    background-image: linear-gradient(to right, #6e24ff, #7750cc, #9379ee, #8b5cff, #6e24ff);
+    background-size: 200% auto;
+    font: 700 60px/1 Rubik;
+    text-align: center;
+    letter-spacing: 1px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 22px 0;
+}
+
+@keyframes moveTimerBackground {
+    to {
+        background-position: 200% center;
+    }
 }
 
 @keyframes fade-in {

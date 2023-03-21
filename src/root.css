@@ -6,7 +6,12 @@
 .vkui--vkBase--light,
 .vkui--vkIOS--light,
 :root {
+    /* static variables */
+    --tabbar-height: 55px;
     --accent: #5d61ec;
+    --red: #b4103a;
+    --green: #28b75a;
+    /* end static variables */
     --profile-action-button: #e6daf1;
     --back-button-background: #ebeafa;
     --text-color: black;
@@ -22,13 +27,12 @@
     --tabbar-background: #f1eff5;
     --input-background: #ede9f1;
     --tabbar-icon-inactive: #4d4d4d;
-    --red: #b4103a;
-    --green: #28b75a;
     --vkui--color_background_content: #ffffff !important;
     --bonus-card-background: #9191da;
     --bonus-card-icon-color: rgba(43, 19, 129, 0.52);
     --screen-spinner-background: #d8c9ff;
     --snackbar-background: #f6f4ff;
+    --divider-color: rgba(0, 0, 0, 0.17);
 }
 
 .vkui--vkCom--dark,
@@ -50,6 +54,7 @@
     --bonus-card-icon-color: #6c89ee;
     --screen-spinner-background: #201934;
     --snackbar-background: #1f1b2f;
+    --divider-color: rgba(255, 255, 255, 0.16);
 }
 
 * {
@@ -78,7 +83,7 @@
 .vkuiPanel:before
 {
     background: var(--background-content) !important;
-    min-height: 100vh;
+    min-height: calc(100vh + var(--tabbar-height));
 }
 
 .vkuiTabbar {

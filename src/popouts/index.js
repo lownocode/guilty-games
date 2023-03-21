@@ -1,1 +1,5 @@
-export const popouts = []
+import { VerifyAdBonusPopout } from "./VerifyAdBonusPopout"
+
+export const popouts = [
+    <VerifyAdBonusPopout nav={"verifyAdBonus"} />
+]
