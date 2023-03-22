@@ -9,24 +9,26 @@ import {
 
 import "../styles/components/tabbar.css"
 
-export const Tabbar = () => {
+const Item = props => {
+    const { icon, onClick, path } = props
+
     const location = useLocation()
 
-    const Item = props => {
-        const { icon, onClick, path } = props
+    return (
+        <div
+            className={`tabbar-item ${location.pathname === path && "tabbar-item-active"}`}
+            onClick={location.pathname !== path ? onClick : null}
+        >
+            {icon}
+        </div>
+    )
+}
 
-        return (
-            <div
-                className={`tabbar-item ${location.pathname === path ? "tabbar-item-active" : ""}`}
-                onClick={location.pathname !== path ? onClick : null}
-            >
-                {icon}
-            </div>
-        )
-    }
+export const Tabbar = ({ hide }) => {
+    const location = useLocation()
 
     return (
-        <div className={"tabbar-container"}>
+        <div className={`tabbar-container ${hide && "tabbar-hide"}`}>
             <Item
                 path={"/"}
                 onClick={() => replace("/")}
@@ -34,7 +36,7 @@ export const Tabbar = () => {
                     <Icon20UserCircleOutline
                         width={28}
                         height={28}
-                        className={`tabbar-icon ${location.pathname === "/" ? "tabbar-icon-active" : ""}`}
+                        className={`tabbar-icon ${location.pathname === "/" && "tabbar-icon-active"}`}
                     />
                 }
             />
@@ -46,7 +48,7 @@ export const Tabbar = () => {
                     <Icon32PollOutline
                         width={28}
                         height={28}
-                        className={`tabbar-icon ${location.pathname === "/rating" ? "tabbar-icon-active" : ""}`}
+                        className={`tabbar-icon ${location.pathname === "/rating" && "tabbar-icon-active"}`}
                     />
                 }
             />
@@ -58,7 +60,7 @@ export const Tabbar = () => {
                     <Icon28GameOutline
                         width={28}
                         height={28}
-                        className={`tabbar-icon ${location.pathname === "/games" ? "tabbar-icon-active" : ""}`}
+                        className={`tabbar-icon ${location.pathname === "/games" && "tabbar-icon-active"}`}
                     />
                 }
             />
@@ -70,7 +72,7 @@ export const Tabbar = () => {
                     <Icon20ShieldLineOutline
                         width={28}
                         height={28}
-                        className={`tabbar-icon ${location.pathname === "/clan" ? "tabbar-icon-active" : ""}`}
+                        className={`tabbar-icon ${location.pathname === "/clan" && "tabbar-icon-active"}`}
                     />
                 }
             />

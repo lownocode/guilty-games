@@ -14,10 +14,11 @@ import {
     Icon32PollOutline
 } from "@vkontakte/icons"
 
-import ratingBackground from "../assets/rating-background.png"
+import ratingBackground from "../assets/rating-background.jpg"
 import { formatNumToKFormat, splitSum } from "../functions"
 import { getDailyRating } from "../redux/reducers"
 import { config, nicknameColors } from "../data"
+import { push } from "@itznevikat/router"
 
 export const Rating = ({ id }) => {
     const dispatch = useDispatch()
@@ -44,8 +45,7 @@ export const Rating = ({ id }) => {
                     paddingLeft: 0,
                     border: user.vkId === userData.vkId ? "1px solid var(--accent)" : "none",
                 }}
-                href={`https://vk.com/id${user.vkId}`}
-                target="_blank"
+                onClick={() => push("?popout=userInfo", { user })}
                 before={
                     <div
                         style={{

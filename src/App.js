@@ -13,7 +13,6 @@ import {
 	Match,
 	Root,
 	View,
-	Epic,
 	useLocation,
 	useParams,
 	matchPopout
@@ -31,12 +30,7 @@ import {
 	Shop,
 	Promocodes,
 } from "./panels"
-import {
-	getUserData,
-	setLoading,
-	setVkToken,
-	startCardsBonusTimer
-} from "./redux/reducers"
+import { setVkToken } from "./redux/reducers"
 import { modals } from "./modals"
 import { popouts } from "./popouts"
 import { setupNavColors } from "./index"
@@ -95,11 +89,9 @@ export const App = () => {
 						</Root>
 					</Match>
 
-					{
-						!TABBAR_HIDE_IN_PANELS.includes(location.pathname) && (
-							<Epic tabbar={<Tabbar />} />
-						)
-					}
+					<Tabbar
+						hide={TABBAR_HIDE_IN_PANELS.includes(location.pathname)}
+					/>
 				</AppRoot>
 			</AdaptivityProvider>
 		</ConfigProvider>

@@ -1,0 +1,69 @@
+.user-info-popout-container {
+    width: 100vw;
+    height: 100vh;
+    background: var(--popout-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: .3s fade-in ease;
+}
+
+.user-info-popout-close-button-container {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+}
+
+.user-info-popout-close-button {
+    border-radius: 100px;
+    padding: 7px 15px;
+    background: var(--popout-body-background);
+    cursor: pointer;
+    font-weight: 300;
+}
+
+.user-info-popout-container-box {
+    background: var(--popout-body-background);
+    padding: 15px;
+    border-radius: 15px;
+    min-width: 50vw;
+    position: relative;
+    animation: .1s showsBox ease;
+}
+
+.user-info-popout-balance {
+    background: var(--accent);
+    padding: 3px 8px;
+    border-radius: 15px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.user-info-popout-stats-card {
+    background: var(--card-background);
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 12px;
+    box-shadow: rgba(0, 0, 0, 0.28) 0 0 100px 1px;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes showsBox {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}

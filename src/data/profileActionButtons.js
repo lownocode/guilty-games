@@ -31,18 +31,11 @@ const profileActionButtons = [
             onClick: () => push("/promocodes")
         },
         {
-            title: "Рефералка",
-            icon: <Icon24TicketOutline style={{ color: "var(--accent)" }} />,
-            onClick: () => push("/?modal=referral")
-        }
-    ],
-    [
-        {
             title: "Наша группа",
             icon: <Icon24Users3Outline style={{ color: "var(--accent)" }} />,
             href: "https://vk.com/public219192868"
         }
-    ],
+    ]
 ]
 
 export const profileActionButtonsRender = profileActionButtons.map((chunk, chunkIndex) => {

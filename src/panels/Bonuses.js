@@ -41,8 +41,6 @@ export const Bonuses = ({ id }) => {
     const dispatch = useDispatch()
     const { userData } = useSelector(state => state.user)
 
-    const [ supportBonusStatus, setSupportBonusStatus ] = useState({ status: "default" })
-    const [ adBonusStatus, setAdBonusStatus ] = useState({ status: "default" })
     const [ loadingBtn, setLoadingBtn ] = useState(null)
     const [ loadingCard, setLoadingCard ] = useState(null)
     const [ bonusCards, setBonusCards ] = useState([])
@@ -67,11 +65,19 @@ export const Bonuses = ({ id }) => {
                 "vk-params": await getRunParams()
             }
         })
-            .then(({ response: { data } }) => {
+            .then(({ data }) => {
                 dispatch(getUserData())
-                setSupportBonusStatus({ ...data, status: "error" })
+                dispatch(openSnackbar({
+                    type: "success",
+                    text: data.message
+                }))
             })
-            .catch(({ response: { data } }) => setSupportBonusStatus({ ...data, status: "error" }))
+            .catch(({ response: { data } }) => {
+                dispatch(openSnackbar({
+                    type: "failure",
+                    text: data.message
+                }))
+            })
             .finally(() => setLoadingBtn(null))
     }
 
@@ -274,27 +280,22 @@ export const Bonuses = ({ id }) => {
                             но при этом ваш баланс должен быть близок к нулевому
                         </div>
 
-                        <FormItem
-                            style={{ padding: 0 }}
-                            bottom={supportBonusStatus.message}
-                            status={supportBonusStatus.status}
+
+                        <Button
+                            size="m"
+                            disabled={loadingBtn !== null || userData.balance > 5}
+                            loading={loadingBtn === "supportBonus"}
+                            before={<Icon24GiftOutline width={20} height={20} />}
+                            stretched
+                            onClick={() => getSupportBonus()}
+                            style={{
+                                color: "#fff",
+                                background: "var(--accent)",
+                                marginTop: 15
+                            }}
                         >
-                            <Button
-                                size="m"
-                                disabled={loadingBtn !== null || userData.balance > 5}
-                                loading={loadingBtn === "supportBonus"}
-                                before={<Icon24GiftOutline width={20} height={20} />}
-                                stretched
-                                onClick={() => getSupportBonus()}
-                                style={{
-                                    color: "#fff",
-                                    background: "var(--accent)",
-                                    marginTop: 15
-                                }}
-                            >
-                                Получить бонус
-                            </Button>
-                        </FormItem>
+                            Получить бонус
+                        </Button>
                     </div>
                 }
                 disabled

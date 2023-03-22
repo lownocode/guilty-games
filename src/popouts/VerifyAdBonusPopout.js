@@ -1,12 +1,10 @@
 import React from "react"
-import HCaptcha from "@hcaptcha/react-hcaptcha"
 import axios from "axios"
-import { replace, useLocation } from "@itznevikat/router"
+import bridge from "@vkontakte/vk-bridge"
+import HCaptcha from "@hcaptcha/react-hcaptcha"
+import { back } from "@itznevikat/router"
 
-import {
-    Button,
-    useAppearance
-} from "@vkontakte/vkui"
+import { Button } from "@vkontakte/vkui"
 
 import { config } from "../data"
 import { getRunParams } from "../functions"
@@ -15,12 +13,21 @@ import { openSnackbar } from "../redux/reducers"
 
 export const VerifyAdBonusPopout = () => {
     const dispatch = useDispatch()
-    const theme = useAppearance()
-    const location = useLocation()
 
     const verifyAd = async (token) => {
+        const { sign } = await bridge.send("VKWebAppCreateHash")
+
+        if (!sign) {
+            back()
+            dispatch(openSnackbar({
+                type: "success",
+                text: "Произошла ошибка при попытке генерации подписи"
+            }))
+        }
+
         await axios.post("/bonus/ads", null, {
             headers: {
+                "vk-sign": sign,
                 "vk-params": await getRunParams(),
                 "h-captcha-token": token
             }
@@ -37,13 +44,13 @@ export const VerifyAdBonusPopout = () => {
                     text: data.message
                 }))
             })
-            .finally(() => replace(location.pathname))
+            .finally(() => back())
     }
 
     return (
         <div
             style={{
-                background: "rgba(0,0,0,0.37)",
+                background: "var(--popout-background)",
                 width: "100vw",
                 height: "100vh",
                 display: "flex",
@@ -54,18 +61,17 @@ export const VerifyAdBonusPopout = () => {
             <div>
                 <HCaptcha
                     sitekey={config.hcaptchaSitekey}
-                    onVerify={(token, ekey) => {verifyAd(token);console.log(ekey)}}
-                    theme={theme}
+                    onVerify={token => verifyAd(token)}
                 />
 
                 <div style={{ marginTop: 15 }}>
                     <Button
                         stretched
-                        onClick={() => replace(location.pathname)}
+                        onClick={() => back()}
                         size={"m"}
                         style={{
-                            color: "#fff",
-                            background: "rgba(10,10,10,0.8)",
+                            color: "#ff8989",
+                            background: "rgba(255,76,76,0.42)",
                             borderRadius: 100
                         }}
                     >

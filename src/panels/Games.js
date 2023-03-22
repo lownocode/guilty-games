@@ -18,16 +18,6 @@ const games = [
         image: wheelImage,
         online: 1,
     },
-    {
-        title: "Wheel",
-        image: wheelImage,
-        online: 1,
-    },
-    {
-        title: "Wheel",
-        image: wheelImage,
-        online: 10,
-    },
 ]
 
 export const Games = ({ id }) => {
@@ -61,13 +51,7 @@ export const Games = ({ id }) => {
             </SimpleCell>
 
             <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                    padding: 15,
-                }}
+                className={"games-game-card--box"}
             >
                 {renderGames}
             </div>
