@@ -37,7 +37,7 @@ const defaultCardsData = [
     { id: 8, isOpen: false },
 ]
 
-export const Bonuses = ({ id }) => {
+export const Bonuses = ({ nav }) => {
     const dispatch = useDispatch()
     const { userData } = useSelector(state => state.user)
 
@@ -223,7 +223,7 @@ export const Bonuses = ({ id }) => {
     }, [])
 
     return (
-        <Panel id={id}>
+        <Panel id={nav}>
             <SimpleCell
                 disabled
                 style={{ paddingLeft: 0 }}
@@ -238,7 +238,7 @@ export const Bonuses = ({ id }) => {
                     <div>
                         <div>
                             Каждые 4 часа вы можете открыть 4 любые карточки и если три из них будут совпадать,
-                            то вы получите указанный на них бонус от 500 до 25 000 монет
+                            то вы получите указанный на них бонус: от 500 до 25 000 монет.
                         </div>
 
                         {

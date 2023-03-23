@@ -8,6 +8,7 @@
 :root {
     /* static variables */
     --tabbar-height: 55px;
+    --panel-indent: calc(var(--tabbar-height) + 15px);
     --accent: #5d61ec;
     --red: #b4103a;
     --green: #28b75a;
@@ -86,7 +87,7 @@
 .vkuiPanel:before
 {
     background: var(--background-content) !important;
-    min-height: calc(100vh + var(--tabbar-height));
+    min-height: 100vh;
 }
 
 .vkuiTabbar {

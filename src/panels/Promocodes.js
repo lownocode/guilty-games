@@ -23,9 +23,9 @@ import {
 
 import { BackButton } from "../components"
 import { declOfNum, getRunParams, splitSum } from "../functions"
-import {getPromocodesHistory, pushPromocodeToHistory} from "../redux/reducers"
+import { getPromocodesHistory, pushPromocodeToHistory } from "../redux/reducers"
 
-export const Promocodes = ({ id }) => {
+export const Promocodes = ({ nav }) => {
     const dispatch = useDispatch()
     const { promocodesHistory } = useSelector(state => state.app)
 
@@ -112,7 +112,7 @@ export const Promocodes = ({ id }) => {
     })
 
     return (
-        <Panel id={id}>
+        <Panel id={nav}>
             <SimpleCell
                 disabled
                 style={{ paddingLeft: 0 }}

@@ -1,4 +1,6 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
+import { push } from "@itznevikat/router"
 
 import {
     Panel,
@@ -10,31 +12,66 @@ import {
 } from "@vkontakte/icons"
 
 import "../styles/panels/games.css"
-import wheelImage from "../assets/games-images/wheel.jpg"
+import { getRunParams } from "../functions"
+import wheelImage from "../assets/games-preview/wheel.jpg"
+import wheelPlusImage from "../assets/games-preview/wheel-plus.jpg"
 
 const games = [
     {
+        id: "wheel",
         title: "Wheel",
         image: wheelImage,
-        online: 1,
+        onClick: () => push("/game/wheel")
+    },
+    {
+        id: "wheel-plus",
+        title: "Wheel Plus",
+        image: wheelPlusImage,
+        onClick: () => push("/game/wheel")
     },
 ]
 
-export const Games = ({ id }) => {
+export const Games = ({ nav }) => {
+    const [ gamesOnline, setGamesOnline ] = useState([])
+
+    const getGamesOnline = async () => {
+        await axios.post("/game/online", null, {
+            headers: {
+                "vk-params": await getRunParams()
+            }
+        })
+            .then(({ data }) => setGamesOnline(data))
+    }
+
+    useEffect(() => {
+        getGamesOnline()
+    }, [])
+
     const renderGames = games.map(game => {
         return (
             <div
-                key={game.title}
+                key={"game-" + game.id}
                 className={"games-game-card--container"}
+                onClick={game.onClick}
                 style={{
                     backgroundImage: `url(${game.image})`,
                 }}
             >
                 <div className={"games-game-card--title"}>
                     {game.title}
+
+                    <div
+                        style={{
+                            height: 6,
+                            width: 1,
+                            background: "var(--divider-color)",
+                            margin: "0 5px"
+                        }}
+                    />
+
                     <div className={"games-game-card--online"}>
                         <Icon16Users2Outline style={{ width: 12, height: 12, marginRight: 3 }} />
-                        {game.online}
+                        {gamesOnline.length ? gamesOnline.find(g => g.game === game.id)?.online || 0 : 0}
                     </div>
                 </div>
             </div>
@@ -42,7 +79,7 @@ export const Games = ({ id }) => {
     })
 
     return (
-        <Panel id={id}>
+        <Panel id={nav}>
             <SimpleCell
                 disabled
                 before={<Icon28GameOutline width={24} height={24} style={{ color: "var(--accent)" }} />}
@@ -55,6 +92,8 @@ export const Games = ({ id }) => {
             >
                 {renderGames}
             </div>
+
+            <div style={{ height: "var(--panel-indent)" }} />
         </Panel>
     )
 }

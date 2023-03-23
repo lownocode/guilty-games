@@ -16,7 +16,7 @@ import { CoinIcon } from "../assets"
 import { getUserData } from "../redux/reducers"
 import { config, nicknameColors, profileActionButtonsRender } from "../data"
 
-export const Profile = ({ id }) => {
+export const Profile = ({ nav }) => {
 	const dispatch = useDispatch()
 	const { userData, fetchingUserData } = useSelector(state => state.user)
 
@@ -96,7 +96,7 @@ export const Profile = ({ id }) => {
 	}
 
 	return (
-		<Panel id={id}>
+		<Panel id={nav}>
 			<SimpleCell
 				disabled
 				className={"defaultHeaderStyle"}
@@ -154,6 +154,8 @@ export const Profile = ({ id }) => {
 
 				{renderStats()}
 			</PullToRefresh>
+
+			<div style={{ height: "var(--panel-indent)" }} />
 		</Panel>
 	)
 }

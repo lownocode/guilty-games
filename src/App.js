@@ -29,13 +29,14 @@ import {
 	Bonuses,
 	Shop,
 	Promocodes,
+	WheelGame
 } from "./panels"
 import { setVkToken } from "./redux/reducers"
 import { modals } from "./modals"
 import { popouts } from "./popouts"
 import { setupNavColors } from "./index"
 
-const TABBAR_HIDE_IN_PANELS = ["/bonuses", "/shop", "/promocodes"]
+const TABBAR_SHOWN_IN_PANELS = ["/", "/rating", "/clan", "/games"]
 
 export const App = () => {
 	const dispatch = useDispatch()
@@ -64,6 +65,7 @@ export const App = () => {
 		dispatch(setVkToken(access_token))
 	}
 
+
 	return (
 		<ConfigProvider platform={"ios"}>
 			<AdaptivityProvider>
@@ -71,26 +73,31 @@ export const App = () => {
 
 				<SplitLayout
 					modal={modals}
-					popout={loading ? <ScreenSpinner /> : matchPopout(popout, popouts)}
+					popout={loading ? <ScreenSpinner/> : matchPopout(popout, popouts)}
 				/>
 
 				<AppRoot>
 					<Match disableSetLocation>
 						<Root nav="/">
 							<View nav="/">
-								<Profile id="profile" nav="/" />
-								<Rating id="rating" nav="/rating" />
-								<Games id="games" nav="/games" />
-								<Clan id="clan" nav="/clan" />
-								<Bonuses id="bonuses" nav="/bonuses" />
-								<Shop id="shop" nav="/shop" />
-								<Promocodes id="promocodes" nav="/promocodes" />
+								<Profile nav="/"/>
+								<Rating nav="/rating"/>
+								<Games nav="/games"/>
+								<Clan nav="/clan"/>
+
+								<Bonuses nav="/bonuses"/>
+								<Shop nav="/shop"/>
+								<Promocodes nav="/promocodes"/>
+
+								<View nav={"/game"}>
+									<WheelGame nav={"/wheel"} />
+								</View>
 							</View>
 						</Root>
 					</Match>
 
 					<Tabbar
-						hide={TABBAR_HIDE_IN_PANELS.includes(location.pathname)}
+						hide={!TABBAR_SHOWN_IN_PANELS.includes(location.pathname)}
 					/>
 				</AppRoot>
 			</AdaptivityProvider>

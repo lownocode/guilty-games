@@ -41,5 +41,6 @@
 }
 
 .tabbar-hide {
-    transform: translateY(var(--tabbar-height))
+    transform: translateY(var(--tabbar-height));
+    opacity: 0;
 }

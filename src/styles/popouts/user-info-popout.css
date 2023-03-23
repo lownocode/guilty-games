@@ -27,9 +27,20 @@
     background: var(--popout-body-background);
     padding: 15px;
     border-radius: 15px;
-    min-width: 50vw;
+    min-width: 60vw;
     position: relative;
     animation: .1s showsBox ease;
+}
+
+@media screen and (max-width: 600px) {
+    .user-info-popout-container-box {
+        background: var(--popout-body-background);
+        padding: 15px;
+        border-radius: 15px;
+        min-width: 82vw;
+        position: relative;
+        animation: .1s showsBox ease;
+    }
 }
 
 .user-info-popout-balance {

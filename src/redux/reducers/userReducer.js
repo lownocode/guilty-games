@@ -47,7 +47,8 @@ const userSlice = createSlice({
             name: "Пользователь",
             bonusesAvailableAt: {
                 cards: 0
-            }
+            },
+            stats: {}
         },
         fetchingUserData: false,
         cardsBonusTimer: false

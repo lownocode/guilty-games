@@ -6,7 +6,6 @@ import {
     SimpleCell,
     Avatar,
     PullToRefresh,
-    PlatformProvider,
 } from "@vkontakte/vkui"
 import {
     Icon24StarsOutline,
@@ -20,7 +19,7 @@ import { getDailyRating } from "../redux/reducers"
 import { config, nicknameColors } from "../data"
 import { push } from "@itznevikat/router"
 
-export const Rating = ({ id }) => {
+export const Rating = ({ nav }) => {
     const dispatch = useDispatch()
     const { userData } = useSelector(state => state.user)
     const { dailyRating, fetchingRating } = useSelector(state => state.rating)
@@ -84,7 +83,7 @@ export const Rating = ({ id }) => {
     })
 
     return (
-        <Panel id={id}>
+        <Panel id={nav}>
             <SimpleCell
                 disabled
                 before={<Icon32PollOutline width={24} height={24} style={{ color: "var(--accent)" }} />}
@@ -180,14 +179,14 @@ export const Rating = ({ id }) => {
                 </div>
             </div>
 
-            <PlatformProvider value="ios">
-                <PullToRefresh
-                    isFetching={fetchingRating}
-                    onRefresh={() => getRatingData()}
-                >
-                    {items}
-                </PullToRefresh>
-            </PlatformProvider>
+            <PullToRefresh
+                isFetching={fetchingRating}
+                onRefresh={() => getRatingData()}
+            >
+                {items}
+            </PullToRefresh>
+
+            <div style={{ height: "var(--panel-indent)" }} />
         </Panel>
     )
 }

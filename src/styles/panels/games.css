@@ -46,7 +46,7 @@
 }
 
 .games-game-card--title {
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.72);
     border-radius: 10px;
     position: absolute;
     top: 8px;
@@ -64,7 +64,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 8px;
 }
 
 .games-game-card--conatiner:hover {

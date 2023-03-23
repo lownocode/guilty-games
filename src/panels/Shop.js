@@ -75,7 +75,7 @@ const offers = [
     }
 ]
 
-export const Shop = ({ id }) => {
+export const Shop = ({ nav }) => {
     const offersRender = offers.map(offer => {
         const icon = () => {
             switch (offer.type) {
@@ -145,7 +145,7 @@ export const Shop = ({ id }) => {
         )
     })
     return (
-        <Panel id={id}>
+        <Panel id={nav}>
             <SimpleCell
                 disabled
                 style={{ paddingLeft: 0 }}
