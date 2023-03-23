@@ -1,17 +1,16 @@
 import React from "react"
-import { back, useMeta } from "@itznevikat/router"
-
 import {
-    SimpleCell,
     Avatar,
-    Button
+    Button,
+    ModalCard,
+    SimpleCell
 } from "@vkontakte/vkui"
+import { useMeta } from "@itznevikat/router"
 
-import "../styles/popouts/user-info-popout.css"
 import { formatNumToKFormat, splitSum } from "../functions"
 import { config } from "../data"
 
-export const UserInfoPopout = () => {
+export const UserInfoModal = ({ nav }) => {
     const { user } = useMeta()
 
     const renderStats = () => {
@@ -80,50 +79,37 @@ export const UserInfoPopout = () => {
     }
 
     return (
-        <div className={"user-info-popout-container"}>
-            <div style={{ margin: 30 }}>
-                <div className={"user-info-popout-close-button-container"}>
-                    <div
-                        onClick={() => back()}
-                        className={"user-info-popout-close-button"}
-                    >
-                        Закрыть
+        <ModalCard nav={nav}>
+            <SimpleCell
+                disabled
+                before={<Avatar src={user.photo} size={66} />}
+                style={{ padding: 0 }}
+                subtitle={
+                    <div className={"user-info-popout-balance"}>
+                        {splitSum(user.balance)} {config.currency}
                     </div>
-                </div>
+                }
+            >
+                {user.name}
+            </SimpleCell>
 
-                <div className={"user-info-popout-container-box"}>
-                    <SimpleCell
-                        disabled
-                        before={<Avatar src={user.photo} size={66} />}
-                        style={{ padding: 0 }}
-                        subtitle={
-                            <div className={"user-info-popout-balance"}>
-                                {splitSum(user.balance)} {config.currency}
-                            </div>
-                        }
-                    >
-                        {user.name}
-                    </SimpleCell>
+            <div style={{ height: 20 }} />
 
-                    <div style={{ height: 20 }} />
+            {renderStats()}
 
-                    {renderStats()}
+            <div style={{ height: 20 }} />
 
-                    <div style={{ height: 20 }} />
-
-                    <Button
-                        stretched
-                        href={`https://vk.com/id${user.vkId}`}
-                        target={"_blank"}
-                        style={{
-                            background: "#0077FF",
-                            color: "#fff"
-                        }}
-                    >
-                        В профиль ВК
-                    </Button>
-                </div>
-            </div>
-        </div>
+            <Button
+                stretched
+                href={`https://vk.com/id${user.vkId}`}
+                target={"_blank"}
+                style={{
+                    background: "#0077FF",
+                    color: "#fff"
+                }}
+            >
+                В профиль ВК
+            </Button>
+        </ModalCard>
     )
 }

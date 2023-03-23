@@ -44,7 +44,7 @@ export const Rating = ({ nav }) => {
                     paddingLeft: 0,
                     border: user.vkId === userData.vkId ? "1px solid var(--accent)" : "none",
                 }}
-                onClick={() => push("?popout=userInfo", { user })}
+                onClick={() => push("?modal=userInfo", { user })}
                 before={
                     <div
                         style={{
