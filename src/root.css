@@ -12,6 +12,9 @@
     --accent: #5d61ec;
     --red: #b4103a;
     --green: #28b75a;
+    --wheel-red: #cc0025;
+    --wheel-black: #2c2c33;
+    --wheel-green: #0f9348;
     /* end static variables */
     --profile-action-button: #e6daf1;
     --back-button-background: #ebeafa;
@@ -115,4 +118,17 @@
 .vkuiSnackbar__body {
     background: var(--snackbar-background) !important;
     border-radius: 13px !important;
+}
+
+.username {
+    animation: moveUsernameBackground 4s linear infinite;
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes moveUsernameBackground {
+    to {
+        background-position: 200% center;
+    }
 }

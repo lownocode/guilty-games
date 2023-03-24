@@ -15,17 +15,17 @@ export const VerifyAdBonusPopout = () => {
     const dispatch = useDispatch()
 
     const verifyAd = async (token) => {
-        const { sign } = await bridge.send("VKWebAppCreateHash")
+        const { sign, ts } = await bridge.send("VKWebAppCreateHash")
 
         if (!sign) {
             back()
-            dispatch(openSnackbar({
+            return dispatch(openSnackbar({
                 type: "success",
                 text: "Произошла ошибка при попытке генерации подписи"
             }))
         }
 
-        await axios.post("/bonus/ads", null, {
+        await axios.post("/bonus/ads", { ts }, {
             headers: {
                 "vk-sign": sign,
                 "vk-params": await getRunParams(),

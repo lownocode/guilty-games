@@ -48,7 +48,8 @@ const userSlice = createSlice({
             bonusesAvailableAt: {
                 cards: 0
             },
-            stats: {}
+            stats: {},
+            nameColor: 0
         },
         fetchingUserData: false,
         cardsBonusTimer: false

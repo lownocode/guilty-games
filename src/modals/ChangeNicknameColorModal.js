@@ -21,10 +21,12 @@ export const ChangeNicknameColorModal = ({ nav }) => {
     const { userData } = useSelector(state => state.user)
 
     const [ loading, setLoading ] = useState(false)
-    const [ selectedColor, setSelectedColor ] = useState(userData.nameColors[0])
+    const [ selectedColor, setSelectedColor ] = useState(userData.nameColor)
     const [ selectColorStatus, setSelectColorStatus ] = useState({ status: "default" })
 
     const colorsRender = nicknameColors.map((color, index) => {
+        if (!color.includes("conic-gradient")) return
+
         return (
             <div
                 key={"color-" + color}
@@ -46,7 +48,7 @@ export const ChangeNicknameColorModal = ({ nav }) => {
         setLoading(true)
 
         await axios.post("/user/changeNameColors", {
-            colors: [selectedColor]
+            colors: selectedColor
         }, {
             headers: {
                 "vk-params": await getRunParams()
@@ -73,9 +75,10 @@ export const ChangeNicknameColorModal = ({ nav }) => {
                 <div>
                     Смена цвета имени
                     <div
+                        className={"username"}
                         style={{
                             fontWeight: "400",
-                            color: nicknameColors[selectedColor]
+                            backgroundImage: nicknameColors[selectedColor]
                         }}
                     >
                         {userData.name}

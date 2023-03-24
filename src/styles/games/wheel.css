@@ -1,0 +1,39 @@
+.wheel-chat-box {
+    width: 35%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.wheel-history-container {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 12px;
+    margin: 15px;
+    overflow: scroll;
+    white-space: nowrap;
+}
+
+.wheel-history-container--head {
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+
+.wheel-history-number {
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.wheel-history-number:active {
+    transform: scale(0.95);
+}

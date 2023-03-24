@@ -4,6 +4,7 @@ import bridge from "@vkontakte/vk-bridge"
 
 import { getRunParams } from "../../functions"
 import { store } from "../store"
+import { setLoading } from "./appReducer"
 
 export const getDailyRating = createAsyncThunk("rating/daily", async () => {
     const { vkToken } = store.getState().app
@@ -34,6 +35,7 @@ export const getDailyRating = createAsyncThunk("rating/daily", async () => {
                 })
             }
         })
+        .finally(() => store.dispatch(setLoading(false)))
 })
 
 const ratingSlice = createSlice({

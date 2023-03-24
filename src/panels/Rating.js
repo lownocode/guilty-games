@@ -1,11 +1,11 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import {
     Panel,
     SimpleCell,
     Avatar,
-    PullToRefresh,
+    PullToRefresh, Spinner,
 } from "@vkontakte/vkui"
 import {
     Icon24StarsOutline,
@@ -16,13 +16,21 @@ import {
 import ratingBackground from "../assets/rating-background.jpg"
 import { formatNumToKFormat, splitSum } from "../functions"
 import { getDailyRating } from "../redux/reducers"
-import { config, nicknameColors } from "../data"
+import { nicknameColors } from "../data"
 import { push } from "@itznevikat/router"
+
+const getTimeToMidnight = () => {
+    return new Date(
+        new Date().setHours(0,0,0,0) - new Date() % 86400000
+    ).toISOString().slice(11, 19)
+}
 
 export const Rating = ({ nav }) => {
     const dispatch = useDispatch()
     const { userData } = useSelector(state => state.user)
     const { dailyRating, fetchingRating } = useSelector(state => state.rating)
+
+    const [ timeToMidnight, setTimeToMidnight ] = useState(getTimeToMidnight())
 
     const getRatingData = async () => {
         dispatch(getDailyRating())
@@ -30,6 +38,16 @@ export const Rating = ({ nav }) => {
 
     useEffect(() => {
         dispatch(getDailyRating())
+    }, [])
+
+    useEffect(() => {
+        let timer = null
+
+        timer = setInterval(() => {
+            setTimeToMidnight(getTimeToMidnight())
+        }, 1000)
+
+        return () => clearInterval(timer)
     }, [])
 
     const items = dailyRating?.users?.map((user, index) => {
@@ -71,12 +89,19 @@ export const Rating = ({ nav }) => {
                 }
             >
                 <SimpleCell
-                    style={{ padding: 0, color: nicknameColors[user.nameColors[0]] }}
+                    style={{ padding: 0 }}
                     disabled
                     before={<Avatar src={user.photo} style={{ marginTop:0, marginBottom: 0 }} />}
                     subtitle={`${splitSum(user.stats.dailyWinCoins)} ${dailyRating.currency}`}
                 >
-                    {user.name}
+                    <div
+                        className={"username"}
+                        style={{
+                            backgroundImage: nicknameColors[user.nameColor]
+                        }}
+                    >
+                        {user.name}
+                    </div>
                 </SimpleCell>
             </SimpleCell>
         )
@@ -169,11 +194,11 @@ export const Rating = ({ nav }) => {
                             fontWeight: "100"
                         }}
                     >
-                        Вы наиграли
+                        До выдачи
                         <div
                             style={{ fontWeight: "500" }}
                         >
-                            {splitSum(userData.stats.dailyWinCoins)} {config.currency}
+                            {timeToMidnight}
                         </div>
                     </div>
                 </div>
@@ -183,7 +208,11 @@ export const Rating = ({ nav }) => {
                 isFetching={fetchingRating}
                 onRefresh={() => getRatingData()}
             >
-                {items}
+                {
+                    items.length === 0 ? (
+                        <Spinner size="large" style={{ margin: "50px 0" }} />
+                    ) : items
+                }
             </PullToRefresh>
 
             <div style={{ height: "var(--panel-indent)" }} />

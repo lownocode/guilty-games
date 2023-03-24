@@ -8,7 +8,7 @@ import {
     Icon24PaletteOutline,
     Icon24PenOutline,
     Icon24TicketOutline,
-    Icon24Users3Outline
+    Icon24CubeBoxOutline
 } from "@vkontakte/icons"
 
 const profileActionButtons = [
@@ -31,9 +31,9 @@ const profileActionButtons = [
             onClick: () => push("/promocodes")
         },
         {
-            title: "Наша группа",
-            icon: <Icon24Users3Outline style={{ color: "var(--accent)" }} />,
-            href: "https://vk.com/public219192868"
+            title: "Инвентарь",
+            icon: <Icon24CubeBoxOutline style={{ color: "var(--accent)" }} />,
+            onClick: () => push("/inventory")
         }
     ]
 ]
@@ -49,8 +49,6 @@ export const profileActionButtonsRender = profileActionButtons.map((chunk, chunk
                     <SimpleCell
                         key={"button-" + button.title}
                         onClick={button.onClick}
-                        target={"_blank"}
-                        href={button.href}
                         before={button.icon}
                         className="profile-action-buttons--button"
                     >

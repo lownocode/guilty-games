@@ -100,9 +100,6 @@ export const Profile = ({ nav }) => {
 			<SimpleCell
 				disabled
 				className={"defaultHeaderStyle"}
-				style={{
-					color: nicknameColors[userData.nameColors[0]],
-				}}
 				before={
 					<Avatar
 						size={35}
@@ -111,7 +108,14 @@ export const Profile = ({ nav }) => {
 				}
 				subtitle={`Онлайн: ${userData.online ?? 0}`}
 			>
-				{userData.name}
+				<div
+					className={"username"}
+					style={{
+						backgroundImage: nicknameColors[userData.nameColor]
+					}}
+				>
+					{userData.name}
+				</div>
 			</SimpleCell>
 
 			<PullToRefresh

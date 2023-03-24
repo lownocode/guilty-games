@@ -7,6 +7,7 @@ import {
 } from "@vkontakte/vkui"
 import { useMeta } from "@itznevikat/router"
 
+import "../styles/modals/user-info-modal.css"
 import { formatNumToKFormat, splitSum } from "../functions"
 import { config } from "../data"
 
@@ -17,7 +18,7 @@ export const UserInfoModal = ({ nav }) => {
         return (
             <div>
                 <div
-                    className={"user-info-popout-stats-card"}
+                    className={"user-info-modal-stats-card"}
                     style={{
                         borderRadius: "14px 14px 8px 8px",
                     }}
@@ -46,7 +47,7 @@ export const UserInfoModal = ({ nav }) => {
                 </div>
 
                 <div
-                    className={"user-info-popout-stats-card"}
+                    className={"user-info-modal-stats-card"}
                     style={{
                         marginTop: 4,
                         borderRadius: "8px 8px 14px 14px",
@@ -85,7 +86,7 @@ export const UserInfoModal = ({ nav }) => {
                 before={<Avatar src={user.photo} size={66} />}
                 style={{ padding: 0 }}
                 subtitle={
-                    <div className={"user-info-popout-balance"}>
+                    <div className={"user-info-modal-balance"}>
                         {splitSum(user.balance)} {config.currency}
                     </div>
                 }
