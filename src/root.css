@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
 
 .vkui--vkCom--light,
 .vkui--vkBase--light,
@@ -39,6 +39,7 @@
     --divider-color: rgba(0, 0, 0, 0.17);
     --popout-background: rgba(10, 14, 31, 0.6);
     --popout-body-background: #e5e3ff;
+    --text-secondary: #8a8a8a;
 }
 
 .vkui--vkCom--dark,
@@ -62,11 +63,12 @@
     --snackbar-background: #1f1b2f;
     --divider-color: rgba(255, 255, 255, 0.16);
     --popout-body-background: #211b3f;
+    --text-secondary: #706e79;
 }
 
 * {
     user-select: none;
-    font-family: "Rubik", sans-serif;
+    font-family: "Ubuntu", sans-serif;
     outline: none;
 }
 

@@ -5,6 +5,7 @@ import { ChangeNicknameModal } from "./ChangeNicknameModal"
 import { ChangeNicknameColorModal } from "./ChangeNicknameColorModal"
 import { CardBonusModal } from "./CardBonusModal"
 import { UserInfoModal } from "./UserInfoModal"
+import { GameCheckModal } from "./GameCheckModal"
 
 export const modals = (
     <ModalRoot>
@@ -12,5 +13,6 @@ export const modals = (
         <ChangeNicknameColorModal nav={"changeNicknameColor"} />
         <CardBonusModal nav={"cardBonus"} />
         <UserInfoModal nav={"userInfo"} />
+        <GameCheckModal nav={"gameCheck"} />
     </ModalRoot>
 )

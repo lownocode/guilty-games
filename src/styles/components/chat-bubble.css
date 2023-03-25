@@ -1,0 +1,43 @@
+.chat-bubble-container {
+    display: flex;
+    align-items: center;
+}
+
+.chat-bubble-avatar-container {
+    position: relative;
+}
+
+.chat-bubble-avatar-icon-box {
+    background: var(--accent);
+    position: absolute;
+    right: -5px;
+    bottom: -2px;
+    border-radius: 100px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-bubble-message-box {
+    background: var(--card-background);
+    border-radius: 12px;
+    max-width: 60vw;
+    margin-left: 12px;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.chat-bubble-message--name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.chat-bubble-message--text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+}

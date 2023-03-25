@@ -7,23 +7,11 @@ import {
 import "../styles/components/chat.css"
 
 const messages = [
-    {
-        name: "Alexander",
-        text: "test"
-    },
-    {
-        name: "kravets",
-        text: "test asfas f as fa sf as fdsfadf as fd as fs asasdfasf"
-    },
-    {
-        name: "user",
-        text: "lfkahflalhfkhkflsasfhkkfksfhsfhsfhlsfhsflhsfhfhafklfkfkjfhfkkfklhflkhklhflhfjjakfjslkajlf"
-    },
+
 ]
 
 export const Chat = () => {
     const renderMessages = messages.map((message, index) => {
-        console.log(index)
         return (
             <div
                 key={"message-" + index}
@@ -51,9 +39,17 @@ export const Chat = () => {
 
     return (
         <div>
-            <div className={"chat-messages-container"}>
-                {renderMessages}
-            </div>
+            {
+                !messages.length ? (
+                    <div className={"chat-messages-empty"}>
+                        В чат этой игры ещё никто не писал. Будьте первым!
+                    </div>
+                ) : (
+                    <div className={"chat-messages-container"}>
+                        {renderMessages}
+                    </div>
+                )
+            }
 
             <div className={"chat-input-container"}>
 

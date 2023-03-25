@@ -49,7 +49,8 @@ const userSlice = createSlice({
                 cards: 0
             },
             stats: {},
-            nameColor: 0
+            nameColor: 0,
+            balance: 0
         },
         fetchingUserData: false,
         cardsBonusTimer: false

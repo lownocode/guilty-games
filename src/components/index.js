@@ -1,3 +1,5 @@
 export * from "./Tabbar"
 export * from "./BackButton"
 export * from "./Chat"
+export * from "./ChatBubble"
+export * from "./BettingBlock"

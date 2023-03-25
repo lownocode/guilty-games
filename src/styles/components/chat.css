@@ -1,12 +1,12 @@
 .chat-messages-container {
     overflow: scroll;
-    max-height: 90vh;
+    max-height: 92vh;
     bottom: 0;
 }
 
 .chat-input-container {
     background: var(--card-background);
-    height: 10vh;
+    height: 8vh;
     border-radius: 15px 15px 0 0;
 }
 
@@ -34,4 +34,10 @@
     font-size: 14px;
     font-weight: 300;
     word-break: break-word;
+}
+
+.chat-messages-empty {
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0 25px 25px 25px;
 }

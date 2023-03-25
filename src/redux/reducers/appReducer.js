@@ -28,8 +28,8 @@ const appSlice = createSlice({
         pushPromocodeToHistory: (state, action) => {
             state.promocodesHistory.unshift(action.payload)
         },
-        setLoading: state => {
-            state.loading = false
+        setLoading: (state, action) => {
+            state.loading = action.payload || false
         },
         openSnackbar: (state, action) => {
             state.snackbar = null

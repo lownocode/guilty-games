@@ -1,4 +1,10 @@
-export const CoinIcon = ({ size = 20, color = "#fff", style = {} }) => {
+export const CoinIcon = props => {
+    const {
+        size = 20,
+        color = "var(--text-color)",
+        style = {}
+    } = props
+
     return (
         <svg
             style={style}

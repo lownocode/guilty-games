@@ -9,7 +9,6 @@
     background: var(--card-background);
     border-radius: 12px;
     padding: 12px;
-    margin: 15px;
     overflow: scroll;
     white-space: nowrap;
 }
@@ -20,6 +19,12 @@
     font-size: 13px;
     color: var(--text-color);
     margin-bottom: 8px;
+}
+
+.wheel-history-empty {
+    color: var(--text-secondary);
+    font-weight: 300;
+    font-size: 14px;
 }
 
 .wheel-history-number {
@@ -36,4 +41,10 @@
 
 .wheel-history-number:active {
     transform: scale(0.95);
+}
+
+.wheel-chat-bubble-container {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
 }

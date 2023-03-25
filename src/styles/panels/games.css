@@ -1,5 +1,5 @@
 .games-game-card--container {
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     border-radius: 15px;
     height: 120px;
@@ -39,12 +39,10 @@
 
 .games-game-card--container:hover {
     transition: 0.3s all ease;
-    background-size: 110%;
     transform: scale(1.02);
 }
 
 .games-game-card--container:active {
-    background-size: 100%;
     transform: scale(0.95);
 }
 
