@@ -9,7 +9,7 @@ import {
 import { formatNumToKFormat, splitSum } from "../functions"
 import { CoinIcon } from "../assets"
 
-export const BettingBlock = () => {
+export const BettingBlock = (props) => {
     const { userData } = useSelector(state => state.user)
 
     const addButtons = [
@@ -32,11 +32,28 @@ export const BettingBlock = () => {
                     borderRadius: 12,
                     flex: 1,
                     marginRight: index + 1 === addButtons.length ? 0 : 10,
-                    fontSize: 14,
-                    textAlign: "center"
+                    fontSize: 13,
+                    textAlign: "center",
+                    position: "relative",
+                    display: "flex",
+                    justifyContent: "center"
                 }}
             >
-                + {formatNumToKFormat(Math.trunc(amount))}
+                {formatNumToKFormat(Math.trunc(amount))}
+
+                <div
+                    style={{
+                        background: "var(--card-background)",
+                        position: "absolute",
+                        fontSize: 11,
+                        padding: "0 7px",
+                        borderRadius: "0 0 8px 8px",
+                        bottom: -12,
+                        color: "var(--text-secondary)"
+                    }}
+                >
+                    добавить
+                </div>
             </div>
         )
     })
@@ -81,47 +98,49 @@ export const BettingBlock = () => {
                 </div>
             </div>
 
-            <div style={{
-                display: "flex",
-                alignItems: "center"
-            }}>
-                <FormItem
+                <div
                     style={{
                         padding: 0,
                         margin: "10px 0",
-                        flex: 1
+                        display: "flex",
                     }}
                 >
                     <Input
                         type={"number"}
                         style={{
+                            flex: 1,
                             height: 40
                         }}
                         placeholder={"Введите ставку"}
                     />
-                </FormItem>
 
-                <div
-                style={{
-                    borderRadius: 12,
-                    padding: "10px 15px",
-                    background: "var(--card-background)",
-                    margin: "0 9px"
-                }}
-                >
-                    x2
-                </div>
+                    <div
+                        style={{
+                            borderRadius: 12,
+                            padding: "10px 15px",
+                            background: "var(--card-background)",
+                            margin: "0 9px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
+                    >
+                        x2
+                    </div>
 
-                <div
-                    style={{
-                        borderRadius: 12,
-                        padding: "10px 15px",
-                        background: "var(--card-background)"
-                    }}
-                >
-                    /2
+                    <div
+                        style={{
+                            borderRadius: 12,
+                            padding: "10px 15px",
+                            background: "var(--card-background)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
+                    >
+                        /2
+                    </div>
                 </div>
-            </div>
 
             <div
             style={{

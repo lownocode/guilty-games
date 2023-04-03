@@ -65,6 +65,9 @@ const userSlice = createSlice({
         },
         setCardsBonusTimer: (state, action) => {
             state.cardsBonusTimer = action.payload
+        },
+        setUser: (state, action) => {
+            state.userData = action.payload
         }
     },
     extraReducers: builder => builder
@@ -79,6 +82,7 @@ const userSlice = createSlice({
 
 export const {
     decrementCardBonusTimer,
-    setCardsBonusTimer
+    setCardsBonusTimer,
+    setUser
 } = userSlice.actions
 export const userReducer = userSlice.reducer

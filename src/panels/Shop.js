@@ -86,6 +86,8 @@ export const Shop = ({ nav }) => {
             }
         }
 
+        const profit = offer.coins * offer.profit / 100
+
         return (
             <SimpleCell
                 key={"offer-" + offer.cost}
@@ -125,21 +127,24 @@ export const Shop = ({ nav }) => {
 
                     <CoinIcon size={14} style={{ marginLeft: 5 }} color={"var(--text-color)"} />
 
-                    {offer.profit >= 1 && (
-                        <div
-                        style={{
-                            padding: "0 8px",
-                            borderRadius: 100,
-                            background: "var(--shop-profit-background)",
-                            marginLeft: 8,
-                            fontSize: 9.8,
-                            textTransform: "uppercase",
-                            color: "#fff"
-                        }}
-                        >
-                            выгода {offer.profit}%
-                        </div>
-                    )}
+                    {
+                        offer.profit >= 1 && (
+                            <div
+                            style={{
+                                padding: "0 6px",
+                                display: "flex",
+                                alignItems: "center",
+                                borderRadius: 100,
+                                background: "var(--shop-profit-background)",
+                                marginLeft: 8,
+                                fontSize: 10,
+                                color: "#fff"
+                            }}
+                            >
+                                + {splitSum(profit)}
+                            </div>
+                        )
+                    }
                 </div>
             </SimpleCell>
         )

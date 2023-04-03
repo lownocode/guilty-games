@@ -8,9 +8,9 @@
 .wheel-history-container {
     background: var(--card-background);
     border-radius: 12px;
-    padding: 12px;
     overflow: scroll;
     white-space: nowrap;
+    padding-bottom: 8px;
 }
 
 .wheel-history-container--head {
@@ -18,13 +18,15 @@
     text-transform: uppercase;
     font-size: 13px;
     color: var(--text-color);
-    margin-bottom: 8px;
+    margin: 12px 0 8px 12px;
 }
 
 .wheel-history-empty {
     color: var(--text-secondary);
     font-weight: 300;
     font-size: 14px;
+    margin-left: 12px;
+    margin-bottom: 6px;
 }
 
 .wheel-history-number {
@@ -44,7 +46,7 @@
 }
 
 .wheel-chat-bubble-container {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
+    position: fixed;
+    bottom: 22px;
+    left: 22px;
 }

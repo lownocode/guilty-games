@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { ErrorBoundary } from "react-error-boundary"
 import bridge from "@vkontakte/vk-bridge"
 import {
 	AdaptivityProvider,
@@ -29,7 +30,7 @@ import {
 	Bonuses,
 	Shop,
 	Promocodes,
-	WheelGame
+	WheelGame, Error
 } from "./panels"
 import { setVkToken } from "./redux/reducers"
 import { modals } from "./modals"
@@ -77,28 +78,30 @@ export const App = () => {
 				/>
 
 				<AppRoot>
-					<Match disableSetLocation>
-						<Root nav="/">
-							<View nav="/">
-								<Profile nav="/"/>
-								<Rating nav="/rating"/>
-								<Games nav="/games"/>
-								<Clan nav="/clan"/>
+					<ErrorBoundary FallbackComponent={Error}>
+						<Match disableSetLocation>
+							<Root nav="/">
+								<View nav="/">
+									<Profile nav="/"/>
+									<Rating nav="/rating"/>
+									<Games nav="/games"/>
+									<Clan nav="/clan"/>
 
-								<Bonuses nav="/bonuses"/>
-								<Shop nav="/shop"/>
-								<Promocodes nav="/promocodes"/>
+									<Bonuses nav="/bonuses"/>
+									<Shop nav="/shop"/>
+									<Promocodes nav="/promocodes"/>
 
-								<View nav={"/game"}>
-									<WheelGame nav={"/wheel"} />
+									<View nav={"/game"}>
+										<WheelGame nav={"/wheel"} />
+									</View>
 								</View>
-							</View>
-						</Root>
-					</Match>
+							</Root>
+						</Match>
 
-					<Tabbar
-						hide={!TABBAR_SHOWN_IN_PANELS.includes(location.pathname)}
-					/>
+						<Tabbar
+							hide={!TABBAR_SHOWN_IN_PANELS.includes(location.pathname)}
+						/>
+					</ErrorBoundary>
 				</AppRoot>
 			</AdaptivityProvider>
 		</ConfigProvider>

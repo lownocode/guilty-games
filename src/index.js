@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import bridge from "@vkontakte/vk-bridge"
-import { Provider } from "react-redux"
 import axios from "axios"
+import { Provider } from "react-redux"
 
 import { store } from "./redux/store"
 import { App } from "./App"

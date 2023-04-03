@@ -5,7 +5,8 @@ import {
     Panel,
     SimpleCell,
     Avatar,
-    PullToRefresh, Spinner,
+    PullToRefresh,
+    Spinner,
 } from "@vkontakte/vkui"
 import {
     Icon24StarsOutline,
@@ -16,7 +17,7 @@ import {
 import ratingBackground from "../assets/rating-background.jpg"
 import { formatNumToKFormat, splitSum } from "../functions"
 import { getDailyRating } from "../redux/reducers"
-import { nicknameColors } from "../data"
+import { config, nicknameColors } from "../data"
 import { push } from "@itznevikat/router"
 
 const getTimeToMidnight = () => {
@@ -147,7 +148,7 @@ export const Rating = ({ nav }) => {
                 </div>
 
                 <div style={{ marginTop: 15, color: "#fff" }}>
-                    Каждый день мы разыгрываем <b>{splitSum(dailyRating.totalReward ?? 0)} {dailyRating.currency}</b> среди
+                    Каждый день мы разыгрываем <b>{splitSum(dailyRating.totalReward ?? 0)} {config.currency}</b> среди
                     10 лучших игроков. Выдача призов происходит ровно в 0:00 по МСК
                 </div>
 
@@ -175,7 +176,7 @@ export const Rating = ({ nav }) => {
                         <div
                             style={{ fontWeight: "500" }}
                         >
-                            {dailyRating.currentUserIndex}
+                            {dailyRating.currentUserIndex || 0}
                         </div>
                     </div>
 

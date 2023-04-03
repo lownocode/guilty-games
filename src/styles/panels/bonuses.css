@@ -88,7 +88,7 @@
     animation: moveTimerBackground 4s linear infinite;
     background-image: linear-gradient(to right, #6e24ff, #7750cc, #9379ee, #8b5cff, #6e24ff);
     background-size: 200% auto;
-    font: 700 60px/1 Rubik;
+    font: 700 60px/1 Ubuntu, sans-serif;
     text-align: center;
     letter-spacing: 1px;
     -webkit-background-clip: text;

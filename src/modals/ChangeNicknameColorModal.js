@@ -47,7 +47,7 @@ export const ChangeNicknameColorModal = ({ nav }) => {
     const changeColor = async () => {
         setLoading(true)
 
-        await axios.post("/user/changeNameColors", {
+        await axios.post("/user/changeNameColor", {
             colors: selectedColor
         }, {
             headers: {

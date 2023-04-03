@@ -25,19 +25,20 @@
     border-radius: 12px;
     max-width: 60vw;
     margin-left: 12px;
-    padding: 5px 10px;
-    font-size: 15px;
+    padding: 8px 13px;
 }
 
 .chat-bubble-message--name {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    font-size: 14px;
 }
 
 .chat-bubble-message--text {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 13px;
+    margin-top: 3px;
 }

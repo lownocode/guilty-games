@@ -28,6 +28,7 @@ import { getPromocodesHistory, pushPromocodeToHistory } from "../redux/reducers"
 export const Promocodes = ({ nav }) => {
     const dispatch = useDispatch()
     const { promocodesHistory } = useSelector(state => state.app)
+    const { userData } = useSelector(state => state.user)
 
     const [ promocode, setPromocode ] = useState("")
     const [ fetchingActivatePromocode, setFetchingActivatePromocode ] = useState(false)
@@ -58,7 +59,7 @@ export const Promocodes = ({ nav }) => {
     const createPromocode = async () => {
         setFetchingCreatePromocode(true)
 
-        await axios.post(`/promocode/create`, {
+        await axios.post("/promocode/create", {
             maxActivates: createPromocodeActivates,
             reward: createPromocodeReward
         }, {
@@ -172,76 +173,80 @@ export const Promocodes = ({ nav }) => {
                 Активировать промокод
             </SimpleCell>
 
-            <SimpleCell
-                multiline
-                subtitle={
-                    <div>
-                        <div>
-                            Награда за активацию умножается на количество активаций
-                        </div>
+            {
+                userData.isAdmin && (
+                    <SimpleCell
+                        multiline
+                        subtitle={
+                            <div>
+                                <div>
+                                    Награда за активацию умножается на количество активаций
+                                </div>
 
-                        <Spacing size={10} />
+                                <Spacing size={10} />
 
-                        <FormLayout>
-                            <FormItem
-                                style={{ padding: 0 }}
-                                bottom={createPromocodeInputStatus.message}
-                                status={createPromocodeInputStatus.status}
-                            >
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                            }}
-                        >
-                            <Input
-                                value={createPromocodeReward}
-                                onChange={event => setCreatePromocodeReward(event.target.value)}
-                                style={{ flex: 1 }}
-                                type={"number"}
-                                placeholder={"Награда за активацию"}
-                            />
+                                <FormLayout>
+                                    <FormItem
+                                        style={{ padding: 0 }}
+                                        bottom={createPromocodeInputStatus.message}
+                                        status={createPromocodeInputStatus.status}
+                                    >
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                            }}
+                                        >
+                                            <Input
+                                                value={createPromocodeReward}
+                                                onChange={event => setCreatePromocodeReward(event.target.value)}
+                                                style={{ flex: 1 }}
+                                                type={"number"}
+                                                placeholder={"Награда за активацию"}
+                                            />
 
-                            <div style={{ width: 15 }} />
+                                            <div style={{ width: 15 }} />
 
-                            <Input
-                                value={createPromocodeActivates}
-                                onChange={event => setCreatePromocodeActivates(event.target.value)}
-                                style={{ flex: 1 }}
-                                type={"number"}
-                                placeholder={"Количество активаций"}
-                            />
-                        </div>
+                                            <Input
+                                                value={createPromocodeActivates}
+                                                onChange={event => setCreatePromocodeActivates(event.target.value)}
+                                                style={{ flex: 1 }}
+                                                type={"number"}
+                                                placeholder={"Количество активаций"}
+                                            />
+                                        </div>
 
-                            </FormItem>
-                        </FormLayout>
+                                    </FormItem>
+                                </FormLayout>
 
-                        <Button
-                            size="m"
-                            stretched
-                            onClick={() => createPromocode()}
-                            loading={fetchingCreatePromocode}
-                            style={{
-                                color: "#fff",
-                                background: "var(--accent)",
-                                marginTop: 15
-                            }}
-                        >
-                            Создать промокод
-                        </Button>
-                    </div>
-                }
-                disabled
-                style={{
-                    background: "var(--card-background)",
-                    borderRadius: 13,
-                    margin: "0 15px",
-                    paddingTop: 5,
-                    paddingBottom: 5
-                }}
-            >
-                Создать промокод
-            </SimpleCell>
+                                <Button
+                                    size="m"
+                                    stretched
+                                    onClick={() => createPromocode()}
+                                    loading={fetchingCreatePromocode}
+                                    style={{
+                                        color: "#fff",
+                                        background: "var(--accent)",
+                                        marginTop: 15
+                                    }}
+                                >
+                                    Создать промокод
+                                </Button>
+                            </div>
+                        }
+                        disabled
+                        style={{
+                            background: "var(--card-background)",
+                            borderRadius: 13,
+                            margin: "0 15px",
+                            paddingTop: 5,
+                            paddingBottom: 5
+                        }}
+                    >
+                        Создать промокод
+                    </SimpleCell>
+                )
+            }
 
             <div
                 style={{

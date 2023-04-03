@@ -5,5 +5,6 @@ export * from "./Clan"
 export * from "./Bonuses"
 export * from "./Shop"
 export * from "./Promocodes"
+export * from "./Error"
 
 export * from "./games/Wheel"
